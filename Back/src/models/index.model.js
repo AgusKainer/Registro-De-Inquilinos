@@ -21,8 +21,8 @@ Inquilino.belongsToMany(Contrato, {
   foreignKey: "inquilinoId",
 });
 
-Local.hasMany(Foto, { foreignKey: "localId" });
-Foto.belongsTo(Local, { foreignKey: "localId" });
+Local.hasMany(Foto, { foreignKey: "local_id" });
+Foto.belongsTo(Local, { foreignKey: "local_id" });
 
 module.exports = {
   Contrato,
