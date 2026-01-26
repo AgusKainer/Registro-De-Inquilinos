@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 const db = require("../../db/conectionDB");
 
 const Inquilinos = db.define("Inquilino", {
-  id: {
+  dni: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
