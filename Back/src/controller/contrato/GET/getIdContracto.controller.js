@@ -1,5 +1,17 @@
-const { Contrato } = require("../../../models/index.model");
+const getContratoByIdService = require("../../../services/contrato/GET/getIdContract.service");
 
-const getIdContratoController = async (req, res) => {};
+const getContratoByIdController = async (req, res) => {
+  try {
+    const contrato = await getContratoByIdService(req.params.id);
 
-module.exports = getIdContratoController;
+    if (!contrato) {
+      return res.status(404).json({ message: "Contrato no encontrado" });
+    }
+
+    res.json(contrato);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+module.exports = getContratoByIdController;

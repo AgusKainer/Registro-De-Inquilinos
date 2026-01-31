@@ -12,4 +12,5 @@ module.exports = {
   DB_USER,
   DB_PASS,
   HOST,
+  SECRET_KEY: process.env.SECRET_KEY || "mi_secreto_super_seguro",
 };

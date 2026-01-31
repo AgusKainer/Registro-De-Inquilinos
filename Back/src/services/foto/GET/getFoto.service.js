@@ -1,5 +1,8 @@
 const { Foto } = require("../../../models/index.model");
 
-const getAllFotoService = async () => {};
+const getFotoService = async () => {
+    const fotos = await Foto.findAll();
+    return fotos;
+};
 
-module.exports = getAllFotoService;
+module.exports = getFotoService;

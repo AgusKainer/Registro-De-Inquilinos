@@ -2,31 +2,40 @@ const Contrato = require("./models/contrato");
 const Foto = require("./models/fotos");
 const Inquilino = require("./models/inquilino");
 const Local = require("./models/local");
+const Admin = require("./models/admin");
+const Reparacion = require("./models/reparacion");
+const Renovacion = require("./models/renovacion");
 
-Contrato.belongsToMany(Local, {
-  through: "ContratoLocales",
-  foreignKey: "contratoId",
+Contrato.belongsTo(Inquilino, {
+  foreignKey: "inquilinoId",
+  allowNull: false,
 });
-Local.belongsToMany(Contrato, {
-  through: "ContratoLocales",
-  foreignKey: "localId",
-});
-
-Contrato.belongsToMany(Inquilino, {
-  through: "ContratoInquilinos",
-  foreignKey: "contratoId",
-});
-Inquilino.belongsToMany(Contrato, {
-  through: "ContratoInquilinos",
+Inquilino.hasMany(Contrato, {
   foreignKey: "inquilinoId",
 });
 
-Local.hasMany(Foto, { foreignKey: "local_id" });
-Foto.belongsTo(Local, { foreignKey: "local_id" });
+Contrato.belongsTo(Local, {
+  foreignKey: "localId",
+  allowNull: false,
+});
+Local.hasMany(Contrato, {
+  foreignKey: "localId",
+});
+
+Local.hasMany(Foto, { foreignKey: "localId" });
+Foto.belongsTo(Local, { foreignKey: "localId" });
+Contrato.hasMany(Reparacion, { foreignKey: "contratoId" });
+Reparacion.belongsTo(Contrato, { foreignKey: "contratoId" });
+
+Contrato.hasMany(Renovacion, { foreignKey: "contratoId" });
+Renovacion.belongsTo(Contrato, { foreignKey: "contratoId" });
 
 module.exports = {
   Contrato,
   Foto,
   Inquilino,
   Local,
+  Admin,
+  Renovacion,
+  Reparacion,
 };

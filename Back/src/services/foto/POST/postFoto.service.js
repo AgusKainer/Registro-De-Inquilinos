@@ -1,5 +1,8 @@
-const {} = require("../../../models/index.model");
+const { Foto } = require("../../../models/index.model");
 
-const postFotoService = async () => {};
+const postFotoService = async (data) => {
+    const newFoto = await Foto.create(data);
+    return newFoto;
+};
 
 module.exports = postFotoService;

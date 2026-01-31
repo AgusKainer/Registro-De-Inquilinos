@@ -3,20 +3,17 @@ const db = require("../../db/conectionDB");
 
 const Fotos = db.define("Fotos", {
   id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
   url: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  descripcion: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
-  local_id: {
-    type: DataTypes.INTEGER,
+  descripcion: DataTypes.TEXT,
+  localId: {
+    type: DataTypes.UUID,
     allowNull: false,
   },
 });

@@ -1,13 +1,8 @@
 const { Contrato } = require("../../../models/index.model");
-const getIdContractService = require("../GET/getIdContract.service");
 
-const deleteContractService = async ({ id }) => {
-  const contract = await getIdContractService({ id });
-  if (!contract) {
-    throw new Error("Contrato No existe");
-  }
-  await contract.destroy();
-  return { message: "Contract eliminado correctamente", data: contract };
+const deleteContractService = async (id) => {
+  const deleted = await Contrato.destroy({ where: { id } });
+  return deleted;
 };
 
 module.exports = deleteContractService;

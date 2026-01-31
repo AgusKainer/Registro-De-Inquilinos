@@ -1,7 +1,18 @@
-const { Contrato } = require("../../../models/index.model");
+const { Contrato, Inquilino, Local } = require("../../../models/index.model");
 
-const allContractServices = async () => {
-  return await Contrato.findAll();
+const getAllContractService = async () => {
+  return await Contrato.findAll({
+    include: [
+      {
+        model: Inquilino,
+        attributes: ["id", "nombre", "apellido", "dni"],
+      },
+      {
+        model: Local,
+        attributes: ["id", "direccion", "numero", "departamento"],
+      },
+    ],
+  });
 };
 
-module.exports = allContractServices;
+module.exports = getAllContractService;

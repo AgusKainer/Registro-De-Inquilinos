@@ -3,9 +3,9 @@ const db = require("../../db/conectionDB");
 
 const Contrato = db.define("Contrato", {
   id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
-    autoIncrement: true,
   },
   fechaDeIngreso: {
     type: DataTypes.DATE,
@@ -24,7 +24,19 @@ const Contrato = db.define("Contrato", {
     allowNull: false,
   },
   clausulas: {
-    type: DataTypes.TEXT,
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  estado: {
+    type: DataTypes.ENUM("activo", "vencido", "rescindido"),
+    defaultValue: "activo",
+  },
+  inquilinoId: {
+    type: DataTypes.UUID,
+    allowNull: false,
+  },
+  localId: {
+    type: DataTypes.UUID,
     allowNull: false,
   },
 });

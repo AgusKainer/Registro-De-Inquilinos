@@ -1,7 +1,28 @@
-const { Contrato } = require("../../../models/index.model");
+const {
+  Contrato,
+  Inquilino,
+  Local,
+  Reparacion,
+  Renovacion,
+} = require("../../../models/index.model");
 
-const getIdContractService = async ({ id }) => {
-  return await Contrato.findByPk(id);
+const getContratoByIdService = async (id) => {
+  return await Contrato.findByPk(id, {
+    include: [
+      {
+        model: Inquilino,
+      },
+      {
+        model: Local,
+      },
+      {
+        model: Reparacion,
+      },
+      {
+        model: Renovacion,
+      },
+    ],
+  });
 };
 
-module.exports = getIdContractService;
+module.exports = getContratoByIdService;
