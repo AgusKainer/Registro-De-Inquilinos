@@ -3,6 +3,7 @@ const postContractService = require("../../../services/contrato/POST/postContrac
 const postContratoController = async (req, res) => {
   try {
     const data = req.body;
+    data.adminId = req.adminId;
 
     if (req.file) {
       data.clausulas = `uploads/${req.file.filename}`;

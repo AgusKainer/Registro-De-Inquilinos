@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const db = require("../../db/conectionDB");
+
 const Renovacion = db.define("Renovacion", {
   id: {
     type: DataTypes.UUID,
@@ -21,6 +22,15 @@ const Renovacion = db.define("Renovacion", {
   pdf: {
     type: DataTypes.STRING, // ruta al PDF
     allowNull: true,
+  },
+  contratoId: {
+    type: DataTypes.UUID,
+    allowNull: true,
+  },
+  // Multi-tenant: cada renovación pertenece a un admin/cliente
+  adminId: {
+    type: DataTypes.UUID,
+    allowNull: false,
   },
 });
 

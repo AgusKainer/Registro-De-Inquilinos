@@ -1,22 +1,18 @@
-// services/contrato/postContract.service.js
-const { Contrato, Inquilino, Local } = require("../../../models/index.model");
+const { Contrato } = require("../../../models/index.model");
 
 const postContractService = async (data) => {
-  const { inquilinoId, localId, ...contratoData } = data;
+  const contrato = await Contrato.create({
+    fechaDeIngreso: data.fechaDeIngreso,
+    fechaVigente: data.fechaVigente,
+    fechaDeAumento: data.fechaDeAumento,
+    valor: Number(data.valor), // 🔥 CLAVE
+    inquilinoId: data.inquilinoId,
+    localId: data.localId,
+    clausulas: data.clausulas || null,
+    adminId: data.adminId,
+  });
 
-  const newContrato = await Contrato.create(contratoData);
-
-  if (inquilinoId) {
-    const inquilino = await Inquilino.findByPk(inquilinoId);
-    if (inquilino) await newContrato.addInquilino(inquilino);
-  }
-
-  if (localId) {
-    const local = await Local.findByPk(localId);
-    if (local) await newContrato.addLocal(local);
-  }
-
-  return newContrato;
+  return contrato;
 };
 
 module.exports = postContractService;

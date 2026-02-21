@@ -6,20 +6,20 @@ const {
   Renovacion,
 } = require("../../../models/index.model");
 
-const getContratoByIdService = async (id) => {
-  return await Contrato.findByPk(id, {
+const getContratoByIdService = async (id, adminId) => {
+  return await Contrato.findOne({
+    where: { id, adminId },
+    attributes: { exclude: ["createdAt", "updatedAt"] },
     include: [
-      {
-        model: Inquilino,
-      },
-      {
-        model: Local,
-      },
+      { model: Inquilino, attributes: { exclude: ["createdAt", "updatedAt"] } },
+      { model: Local, attributes: { exclude: ["createdAt", "updatedAt"] } },
       {
         model: Reparacion,
+        attributes: { exclude: ["createdAt", "updatedAt"] },
       },
       {
         model: Renovacion,
+        attributes: { exclude: ["createdAt", "updatedAt"] },
       },
     ],
   });

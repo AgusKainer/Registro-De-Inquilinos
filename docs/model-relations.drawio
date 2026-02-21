@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net">
+  <diagram name="Relaciones Modelos" id="relaciones-1">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="800">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Fondo oscuro -->
+        <mxCell id="bg" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#1f1f1f;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1200" height="800" as="geometry"/>
+        </mxCell>
+
+        <!-- ADMIN -->
+        <mxCell id="2" value="ADMIN\nid PK\nusername" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#ffffff;fillColor=#a9c9ff;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="80" y="40" width="200" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- INQUILINO -->
+        <mxCell id="3" value="INQUILINO\nid PK\nadminId FK" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#ffffff;fillColor=#ffeaa7;fontColor=#111111;" vertex="1" parent="1">
+          <mxGeometry x="80" y="160" width="220" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- LOCAL -->
+        <mxCell id="4" value="LOCAL\nid PK\nadminId FK" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#ffffff;fillColor=#e6d6f0;fontColor=#111111;" vertex="1" parent="1">
+          <mxGeometry x="360" y="160" width="220" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- FOTOS -->
+        <mxCell id="6" value="FOTOS\nid PK\nlocalId FK\nadminId FK" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#ffffff;fillColor=#cfead6;fontColor=#111111;" vertex="1" parent="1">
+          <mxGeometry x="640" y="160" width="220" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- CONTRATO -->
+        <mxCell id="5" value="CONTRATO\nid PK\ninquilinoId FK\nlocalId FK\nadminId FK" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#ffffff;fillColor=#ffcccb;fontColor=#111111;" vertex="1" parent="1">
+          <mxGeometry x="240" y="280" width="320" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- REPARACION -->
+        <mxCell id="7" value="REPARACION\nid PK\ncontratoId FK\nadminId FK" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#ffffff;fillColor=#ffeaa7;fontColor=#111111;" vertex="1" parent="1">
+          <mxGeometry x="240" y="420" width="300" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- RENOVACION -->
+        <mxCell id="8" value="RENOVACION\nid PK\ncontratoId FK\nadminId FK" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#ffffff;fillColor=#e6d6f0;fontColor=#111111;" vertex="1" parent="1">
+          <mxGeometry x="560" y="420" width="300" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Conectores: estilo claro y flechas -->
+        <mxCell id="9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ffffff;strokeWidth=2;endArrow=block;" edge="1" parent="1" source="2" target="3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ffffff;strokeWidth=2;endArrow=block;" edge="1" parent="1" source="2" target="4">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ffffff;strokeWidth=2;endArrow=block;" edge="1" parent="1" source="2" target="5">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ffffff;strokeWidth=2;endArrow=block;" edge="1" parent="1" source="2" target="6">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ffffff;strokeWidth=2;endArrow=block;" edge="1" parent="1" source="2" target="7">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ffffff;strokeWidth=2;endArrow=block;" edge="1" parent="1" source="2" target="8">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ffffff;strokeWidth=2;endArrow=block;" edge="1" parent="1" source="3" target="5">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ffffff;strokeWidth=2;endArrow=block;" edge="1" parent="1" source="4" target="5">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ffffff;strokeWidth=2;endArrow=block;" edge="1" parent="1" source="4" target="6">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ffffff;strokeWidth=2;endArrow=block;" edge="1" parent="1" source="5" target="7">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#ffffff;strokeWidth=2;endArrow=block;" edge="1" parent="1" source="5" target="8">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

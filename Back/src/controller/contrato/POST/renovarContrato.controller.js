@@ -9,7 +9,7 @@ const renovarContratoController = async (req, res) => {
       data.clausulas = `uploads/${req.file.filename}`;
     }
 
-    const contrato = await renovarContratoService(id, data);
+    const contrato = await renovarContratoService(id, data, req.adminId);
 
     res.json({
       message: "Contrato renovado correctamente",

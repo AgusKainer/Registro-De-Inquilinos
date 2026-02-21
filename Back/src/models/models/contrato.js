@@ -39,6 +39,11 @@ const Contrato = db.define("Contrato", {
     type: DataTypes.UUID,
     allowNull: false,
   },
+  // Multi-tenant: cada contrato pertenece a un admin/cliente
+  adminId: {
+    type: DataTypes.UUID,
+    allowNull: false,
+  },
 });
 
 module.exports = Contrato;

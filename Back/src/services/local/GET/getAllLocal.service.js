@@ -1,11 +1,12 @@
 const { Local } = require("../../../models/index.model");
 
-const getAllLocalService = async () => {
-    const { Foto } = require("../../../models/index.model");
-    const locales = await Local.findAll({
-        include: [{ model: Foto }]
-    });
-    return locales;
+const getAllLocalService = async (adminId) => {
+  const { Foto } = require("../../../models/index.model");
+  const locales = await Local.findAll({
+    where: { adminId },
+    include: [{ model: Foto }],
+  });
+  return locales;
 };
 
 module.exports = getAllLocalService;

@@ -6,10 +6,13 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import TenantView from "./pages/TenantView";
 import Inquilinos from "./pages/Inquilinos"; // Keeping original page just in case
+import ContratoDetalle from "./pages/ContratoDetalle";
+import LocalDetalle from "./pages/LocalDetalle";
 
 import Register from "./pages/Register";
 
 import ThemeToggle from "./components/ThemeToggle";
+import Contratos from "./pages/Contratos";
 
 function App() {
   return (
@@ -18,7 +21,18 @@ function App() {
         <div className="app">
           <nav>
             <div className="nav-links">
-              <Link to="/" style={{ fontSize: "1.1rem", fontWeight: "700", background: "var(--accent-gradient)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>InquiliCheck</Link>
+              <Link
+                to="/"
+                style={{
+                  fontSize: "1.1rem",
+                  fontWeight: "700",
+                  background: "var(--accent-gradient)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                InquiliCheck
+              </Link>
               <Link to="/admin">Dashboard</Link>
             </div>
             <ThemeToggle />
@@ -36,6 +50,9 @@ function App() {
                 <Route element={<ProtectedRoute />}>
                   <Route path="/admin" element={<Dashboard />} />
                   <Route path="/inquilinos" element={<Inquilinos />} />
+                  <Route path="/contratos" element={<Contratos />} />
+                  <Route path="/contratos/:id" element={<ContratoDetalle />} />
+                  <Route path="/locales/:id" element={<LocalDetalle />} />
                 </Route>
 
                 {/* Fallback */}

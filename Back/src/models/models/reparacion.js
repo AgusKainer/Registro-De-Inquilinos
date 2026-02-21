@@ -27,6 +27,15 @@ const Reparacion = db.define("Reparacion", {
     type: DataTypes.ENUM("DUENO", "INQUILINO"),
     allowNull: false,
   },
+  contratoId: {
+    type: DataTypes.UUID,
+    allowNull: true,
+  },
+  // Multi-tenant: cada reparación pertenece a un admin/cliente
+  adminId: {
+    type: DataTypes.UUID,
+    allowNull: false,
+  },
 });
 
 module.exports = Reparacion;

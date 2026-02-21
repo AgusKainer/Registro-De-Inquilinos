@@ -2,7 +2,7 @@ const getContratoByIdService = require("../../../services/contrato/GET/getIdCont
 
 const getContratoByIdController = async (req, res) => {
   try {
-    const contrato = await getContratoByIdService(req.params.id);
+    const contrato = await getContratoByIdService(req.params.id, req.adminId);
 
     if (!contrato) {
       return res.status(404).json({ message: "Contrato no encontrado" });

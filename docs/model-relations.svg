@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333" />
+    </marker>
+    <style>
+      .box { stroke:#000; stroke-width:1.2px; rx:4; }
+      .label { font-family: Arial, Helvetica, sans-serif; font-size:12px; fill:#111; }
+      .title { font-weight:700; font-size:13px; }
+    </style>
+  </defs>
+
+  <!-- ADMIN -->
+  <rect x="50" y="40" width="160" height="70" class="box" fill="#DAE8FC" />
+  <text x="130" y="62" class="label title" text-anchor="middle">ADMIN</text>
+  <text x="130" y="80" class="label" text-anchor="middle">id PK</text>
+  <text x="130" y="96" class="label" text-anchor="middle">username</text>
+
+  <!-- INQUILINO -->
+  <rect x="50" y="140" width="180" height="70" class="box" fill="#FFF2CC" />
+  <text x="140" y="162" class="label title" text-anchor="middle">INQUILINO</text>
+  <text x="140" y="180" class="label" text-anchor="middle">id PK</text>
+  <text x="140" y="196" class="label" text-anchor="middle">adminId FK</text>
+
+  <!-- LOCAL -->
+  <rect x="260" y="140" width="180" height="70" class="box" fill="#E1D5E7" />
+  <text x="350" y="162" class="label title" text-anchor="middle">LOCAL</text>
+  <text x="350" y="180" class="label" text-anchor="middle">id PK</text>
+  <text x="350" y="196" class="label" text-anchor="middle">adminId FK</text>
+
+  <!-- CONTRATO -->
+  <rect x="160" y="240" width="220" height="100" class="box" fill="#F8CECC" />
+  <text x="270" y="262" class="label title" text-anchor="middle">CONTRATO</text>
+  <text x="270" y="282" class="label" text-anchor="middle">id PK</text>
+  <text x="270" y="298" class="label" text-anchor="middle">inquilinoId FK</text>
+  <text x="270" y="314" class="label" text-anchor="middle">localId FK</text>
+  <text x="270" y="330" class="label" text-anchor="middle">adminId FK</text>
+
+  <!-- FOTOS -->
+  <rect x="460" y="140" width="180" height="70" class="box" fill="#D5E8D4" />
+  <text x="550" y="162" class="label title" text-anchor="middle">FOTOS</text>
+  <text x="550" y="180" class="label" text-anchor="middle">id PK</text>
+  <text x="550" y="196" class="label" text-anchor="middle">localId FK</text>
+
+  <!-- REPARACION -->
+  <rect x="160" y="360" width="220" height="70" class="box" fill="#FFF2CC" />
+  <text x="270" y="382" class="label title" text-anchor="middle">REPARACION</text>
+  <text x="270" y="400" class="label" text-anchor="middle">id PK</text>
+  <text x="270" y="416" class="label" text-anchor="middle">contratoId FK</text>
+
+  <!-- RENOVACION -->
+  <rect x="420" y="360" width="220" height="70" class="box" fill="#E1D5E7" />
+  <text x="530" y="382" class="label title" text-anchor="middle">RENOVACION</text>
+  <text x="530" y="400" class="label" text-anchor="middle">id PK</text>
+  <text x="530" y="416" class="label" text-anchor="middle">contratoId FK</text>
+
+  <!-- Conexiones desde ADMIN -->
+  <line x1="210" y1="75" x2="140" y2="140" stroke="#333" stroke-width="1.2" marker-end="url(#arrow)" />
+  <line x1="210" y1="75" x2="290" y2="140" stroke="#333" stroke-width="1.2" marker-end="url(#arrow)" />
+  <line x1="210" y1="75" x2="270" y2="290" stroke="#333" stroke-width="1.2" marker-end="url(#arrow)" />
+  <line x1="210" y1="75" x2="550" y2="175" stroke="#333" stroke-width="1.2" marker-end="url(#arrow)" />
+  <line x1="210" y1="75" x2="270" y2="395" stroke="#333" stroke-width="1.2" marker-end="url(#arrow)" />
+  <line x1="210" y1="75" x2="530" y2="395" stroke="#333" stroke-width="1.2" marker-end="url(#arrow)" />
+
+  <!-- Relaciones internas -->
+  <line x1="140" y1="210" x2="250" y2="260" stroke="#333" stroke-width="1.2" marker-end="url(#arrow)" />
+  <line x1="440" y1="175" x2="300" y2="260" stroke="#333" stroke-width="1.2" marker-end="url(#arrow)" />
+  <line x1="440" y1="175" x2="520" y2="175" stroke="#333" stroke-width="1.2" marker-end="url(#arrow)" />
+  <line x1="270" y1="340" x2="260" y2="395" stroke="#333" stroke-width="1.2" marker-end="url(#arrow)" />
+  <line x1="320" y1="340" x2="540" y2="395" stroke="#333" stroke-width="1.2" marker-end="url(#arrow)" />
+
+</svg>

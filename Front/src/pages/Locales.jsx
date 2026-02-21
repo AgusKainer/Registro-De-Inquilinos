@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { getLocales, createLocal } from "../services/api";
+import { Link } from "react-router-dom";
+import { getLocales, createLocal, deleteLocal } from "../services/api";
 
 const Locales = () => {
   const [locales, setLocales] = useState([]);
@@ -21,6 +22,17 @@ const Locales = () => {
       setLocales(data);
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (window.confirm("¿Está seguro de que desea eliminar esta propiedad?")) {
+      try {
+        await deleteLocal(id);
+        fetchLocales();
+      } catch (error) {
+        alert("Error al eliminar la propiedad. Asegúrese de que no tenga contratos vinculados.");
+      }
     }
   };
 
@@ -113,15 +125,20 @@ const Locales = () => {
             />
           </div>
           <div className="form-group">
-            <label>Cargar Fotos</label>
+            <label>Cargar Fotos (Selección Múltiple)</label>
             <input
               type="file"
               name="fotos"
-              multiple
+              multiple={true}
               accept="image/*"
               onChange={handleChange}
               style={{ padding: "0.5rem" }}
             />
+            {form.fotos && form.fotos.length > 0 && (
+              <p style={{ fontSize: "0.8rem", color: "var(--success-color)", marginTop: "0.4rem", fontWeight: "600" }}>
+                ✅ {form.fotos.length} fotos seleccionadas. (Mantén Ctrl para seleccionar varias)
+              </p>
+            )}
           </div>
           <div className="form-group" style={{ gridColumn: "span 2" }}>
             <label>Observaciones y Detalles</label>
@@ -225,11 +242,25 @@ const Locales = () => {
               </p>
 
               <div style={{ display: "flex", gap: "0.5rem" }}>
-                <button
+                <Link
+                  to={`/locales/${local.id}`}
                   className="secondary"
-                  style={{ flex: 1, padding: "0.6rem", fontSize: "0.85rem" }}
+                  style={{ flex: 1, padding: "0.6rem", fontSize: "0.85rem", textAlign: "center", textDecoration: "none" }}
                 >
                   Gestionar
+                </Link>
+                <button
+                  onClick={() => handleDelete(local.id)}
+                  style={{
+                    flex: 1,
+                    padding: "0.6rem",
+                    fontSize: "0.85rem",
+                    background: "rgba(239, 68, 68, 0.1)",
+                    color: "var(--error-color)",
+                    border: "1px solid rgba(239, 68, 68, 0.2)"
+                  }}
+                >
+                  Eliminar
                 </button>
                 {local.Fotos && local.Fotos.length > 1 && (
                   <div

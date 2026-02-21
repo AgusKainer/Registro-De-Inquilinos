@@ -1,11 +1,12 @@
-const { Local } = require("../../../models/index.model");
+const { Local, Foto } = require("../../../models/index.model");
 
-const putLocalService = async (id, data) => {
-    const [updated] = await Local.update(data, { where: { id } });
-    if (updated) {
-        return await Local.findByPk(id);
-    }
-    return null;
+const putLocalService = async (id, data, adminId) => {
+  await Local.update(data, { where: { id, adminId } });
+  const local = await Local.findByPk(id, {
+    where: { id, adminId },
+    include: [{ model: Foto }],
+  });
+  return local;
 };
 
 module.exports = putLocalService;

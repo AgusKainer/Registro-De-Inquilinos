@@ -16,6 +16,11 @@ const Fotos = db.define("Fotos", {
     type: DataTypes.UUID,
     allowNull: false,
   },
+  // Multi-tenant: cada foto pertenece a un admin/cliente
+  adminId: {
+    type: DataTypes.UUID,
+    allowNull: false,
+  },
 });
 
 module.exports = Fotos;

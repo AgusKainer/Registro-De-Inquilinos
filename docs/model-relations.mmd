@@ -1,0 +1,49 @@
+erDiagram
+    ADMIN {
+      UUID id PK
+      string username
+    }
+    INQUILINO {
+      UUID id PK
+      string nombre
+      UUID adminId FK
+    }
+    LOCAL {
+      UUID id PK
+      string direccion
+      UUID adminId FK
+    }
+    CONTRATO {
+      UUID id PK
+      UUID inquilinoId FK
+      UUID localId FK
+      UUID adminId FK
+    }
+    FOTOS {
+      UUID id PK
+      string url
+      UUID localId FK
+      UUID adminId FK
+    }
+    REPARACION {
+      UUID id PK
+      UUID contratoId FK
+      UUID adminId FK
+    }
+    RENOVACION {
+      UUID id PK
+      UUID contratoId FK
+      UUID adminId FK
+    }
+
+    ADMIN ||--o{ INQUILINO : "adminId"
+    ADMIN ||--o{ LOCAL : "adminId"
+    ADMIN ||--o{ CONTRATO : "adminId"
+    ADMIN ||--o{ FOTOS : "adminId"
+    ADMIN ||--o{ REPARACION : "adminId"
+    ADMIN ||--o{ RENOVACION : "adminId"
+    INQUILINO ||--o{ CONTRATO : "inquilinoId"
+    LOCAL ||--o{ CONTRATO : "localId"
+    LOCAL ||--o{ FOTOS : "localId"
+    CONTRATO ||--o{ REPARACION : "contratoId"
+    CONTRATO ||--o{ RENOVACION : "contratoId"

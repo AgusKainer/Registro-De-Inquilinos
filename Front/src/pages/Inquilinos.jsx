@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getInquilinos, createInquilino } from "../services/api";
+import { getInquilinos, createInquilino, deleteInquilino } from "../services/api";
 
 export default function Inquilinos() {
   const [items, setItems] = useState([]);
@@ -23,6 +23,17 @@ export default function Inquilinos() {
       setItems([]);
     }
   }
+
+  const handleDelete = async (id) => {
+    if (window.confirm("¿Está seguro de que desea eliminar este inquilino?")) {
+      try {
+        await deleteInquilino(id);
+        fetchList();
+      } catch (error) {
+        alert("Error al eliminar el inquilino. Asegúrese de que no tenga contratos activos.");
+      }
+    }
+  };
 
   async function submit(e) {
     e.preventDefault();
@@ -111,6 +122,7 @@ export default function Inquilinos() {
                 <th>Teléfono</th>
                 <th>DNI</th>
                 <th>Estado</th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -138,6 +150,21 @@ export default function Inquilinos() {
                     >
                       ACTIVO
                     </span>
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => handleDelete(i.id)}
+                      style={{
+                        padding: "0.3rem 0.7rem",
+                        fontSize: "0.75rem",
+                        background: "rgba(239, 68, 68, 0.1)",
+                        color: "var(--error-color)",
+                        border: "1px solid rgba(239, 68, 68, 0.2)",
+                        borderRadius: "8px"
+                      }}
+                    >
+                      Eliminar
+                    </button>
                   </td>
                 </tr>
               ))}

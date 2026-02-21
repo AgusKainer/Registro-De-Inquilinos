@@ -1,16 +1,22 @@
 const { Inquilino, Contrato } = require("../../../models/index.model");
 
-const getByDniService = async (dni) => {
-    const inquilino = await Inquilino.findOne({
-        where: { dni },
+const getByDniService = async (dni, adminId) => {
+  const { Local, Foto } = require("../../../models/index.model");
+  const inquilino = await Inquilino.findOne({
+    where: { dni, adminId },
+    include: [
+      {
+        model: Contrato,
         include: [
-            {
-                model: Contrato,
-                through: { attributes: [] },
-            },
+          {
+            model: Local,
+            include: [{ model: Foto }],
+          },
         ],
-    });
-    return inquilino;
+      },
+    ],
+  });
+  return inquilino;
 };
 
 module.exports = getByDniService;

@@ -3,6 +3,7 @@ const postInquilinoService = require("../../../services/inquilino/POST/postInqui
 const postInquilinoController = async (req, res) => {
   try {
     const data = req.body;
+    data.adminId = req.adminId;
     console.log("que recibo desde el front: ", req.body);
 
     const newInquilino = await postInquilinoService(data);

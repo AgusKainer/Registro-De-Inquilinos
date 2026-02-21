@@ -12,7 +12,7 @@ const local = Router();
 local.get("/", getAll);
 local.get("/:id", getId);
 local.post("/", upload.array("fotos"), postLocal);
-local.put("/:id", putLocal);
+local.put("/:id", upload.array("fotos"), putLocal);
 local.delete("/:id", deleteLocal);
 
 module.exports = local;

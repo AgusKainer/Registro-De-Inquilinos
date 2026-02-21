@@ -1,8 +1,22 @@
-const { Local } = require("../../../models/index.model");
+const {
+  Local,
+  Foto,
+  Contrato,
+  Inquilino,
+} = require("../../../models/index.model");
 
-const getIdLocalService = async (id) => {
-    const local = await Local.findByPk(id);
-    return local;
+const getIdLocalService = async (id, adminId) => {
+  const local = await Local.findByPk(id, {
+    where: { id, adminId },
+    include: [
+      { model: Foto },
+      {
+        model: Contrato,
+        include: [{ model: Inquilino }],
+      },
+    ],
+  });
+  return local;
 };
 
 module.exports = getIdLocalService;

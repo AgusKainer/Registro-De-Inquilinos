@@ -21,8 +21,13 @@ const Local = db.define("Local", {
     allowNull: false,
   },
   n_departamento: {
-    type: DataTypes.STRING, // mejor que INTEGER
+    type: DataTypes.STRING,
     allowNull: true,
+  },
+  // Multi-tenant: cada local pertenece a un admin/cliente
+  adminId: {
+    type: DataTypes.UUID,
+    allowNull: false,
   },
 });
 

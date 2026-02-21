@@ -9,7 +9,6 @@ const Inquilinos = db.define("Inquilino", {
   },
   dni: {
     type: DataTypes.STRING,
-    unique: true,
     allowNull: false,
   },
   nombre: {
@@ -18,6 +17,11 @@ const Inquilinos = db.define("Inquilino", {
   },
   telefono: {
     type: DataTypes.STRING,
+    allowNull: false,
+  },
+  // Multi-tenant: cada inquilino pertenece a un admin/cliente
+  adminId: {
+    type: DataTypes.UUID,
     allowNull: false,
   },
 });

@@ -3,6 +3,7 @@ const postReparacionService = require("../../../services/reparacion/POST/postRep
 const postReparacionController = async (req, res) => {
   try {
     const data = req.body;
+    data.adminId = req.adminId;
 
     if (req.file) {
       data.comprobante = `uploads/${req.file.filename}`;
