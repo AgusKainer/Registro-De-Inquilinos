@@ -31,7 +31,9 @@ const Locales = () => {
         await deleteLocal(id);
         fetchLocales();
       } catch (error) {
-        alert("Error al eliminar la propiedad. Asegúrese de que no tenga contratos vinculados.");
+        alert(
+          "Error al eliminar la propiedad. Asegúrese de que no tenga contratos vinculados.",
+        );
       }
     }
   };
@@ -135,8 +137,16 @@ const Locales = () => {
               style={{ padding: "0.5rem" }}
             />
             {form.fotos && form.fotos.length > 0 && (
-              <p style={{ fontSize: "0.8rem", color: "var(--success-color)", marginTop: "0.4rem", fontWeight: "600" }}>
-                ✅ {form.fotos.length} fotos seleccionadas. (Mantén Ctrl para seleccionar varias)
+              <p
+                style={{
+                  fontSize: "0.8rem",
+                  color: "var(--success-color)",
+                  marginTop: "0.4rem",
+                  fontWeight: "600",
+                }}
+              >
+                ✅ {form.fotos.length} fotos seleccionadas. (Mantén Ctrl para
+                seleccionar varias)
               </p>
             )}
           </div>
@@ -242,13 +252,32 @@ const Locales = () => {
               </p>
 
               <div style={{ display: "flex", gap: "0.5rem" }}>
-                <Link
-                  to={`/locales/${local.id}`}
-                  className="secondary"
-                  style={{ flex: 1, padding: "0.6rem", fontSize: "0.85rem", textAlign: "center", textDecoration: "none" }}
+                <button
+                  style={{
+                    flex: 1,
+                    padding: "0.6rem",
+                    fontSize: "0.85rem",
+                    background: "rgba(239, 68, 68, 0.1)",
+                    color: "var(--error-color)",
+                    border: "1px solid rgba(239, 68, 68, 0.2)",
+                  }}
                 >
-                  Gestionar
-                </Link>
+                  {" "}
+                  <Link
+                    to={`/locales/${local.id}`}
+                    className="secondary"
+                    style={{
+                      flex: 1,
+                      padding: "0.6rem",
+                      fontSize: "0.85rem",
+                      textAlign: "center",
+                      color: "white",
+                    }}
+                  >
+                    Gestionar
+                  </Link>
+                </button>
+
                 <button
                   onClick={() => handleDelete(local.id)}
                   style={{
@@ -257,7 +286,7 @@ const Locales = () => {
                     fontSize: "0.85rem",
                     background: "rgba(239, 68, 68, 0.1)",
                     color: "var(--error-color)",
-                    border: "1px solid rgba(239, 68, 68, 0.2)"
+                    border: "1px solid rgba(239, 68, 68, 0.2)",
                   }}
                 >
                   Eliminar

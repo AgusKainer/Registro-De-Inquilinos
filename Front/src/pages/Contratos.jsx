@@ -308,30 +308,56 @@ const Contratos = () => {
             </div>
             <div style={{ display: "flex", gap: "0.75rem" }}>
               {c.clausulas && (
-                <a
-                  href={`http://localhost:30/${c.clausulas}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="secondary"
+                <button
                   style={{
-                    display: "flex",
-                    alignItems: "center",
                     padding: "0.5rem 1rem",
-                    borderRadius: "10px",
                     fontSize: "0.85rem",
-                    fontWeight: "600",
+                    background: "rgba(239, 68, 68, 0.1)",
+                    color: "var(--error-color)",
+                    border: "1px solid rgba(239, 68, 68, 0.2)",
                   }}
                 >
-                  Ver PDF
-                </a>
+                  <a
+                    href={`http://localhost:30/${c.clausulas}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="secondary"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      padding: "0.5rem 1rem",
+                      borderRadius: "10px",
+                      fontSize: "0.85rem",
+                      fontWeight: "600",
+                      color: "white",
+                    }}
+                  >
+                    Ver PDF
+                  </a>
+                </button>
               )}
-              <Link
-                to={`/contratos/${c.id}`}
-                className="secondary"
-                style={{ padding: "0.5rem 1rem", fontSize: "0.85rem" }}
+              <button
+                style={{
+                  padding: "0.5rem 1rem",
+                  fontSize: "0.85rem",
+                  background: "rgba(239, 68, 68, 0.1)",
+                  color: "var(--error-color)",
+                  border: "1px solid rgba(239, 68, 68, 0.2)",
+                }}
               >
-                Gestionar
-              </Link>
+                <Link
+                  to={`/contratos/${c.id}`}
+                  className="secondary"
+                  style={{
+                    padding: "0.5rem 1rem",
+                    fontSize: "0.85rem",
+                    color: "white",
+                  }}
+                >
+                  Gestionar
+                </Link>
+              </button>
+
               <button
                 onClick={() => handleDelete(c.id)}
                 style={{

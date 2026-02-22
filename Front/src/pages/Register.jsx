@@ -163,7 +163,10 @@ const Register = () => {
             Crear Cuenta
           </button>
           <div style={{ marginTop: "1.5rem" }}>
-            <Link to="/login" style={{ fontSize: "0.9rem", fontWeight: "600" }}>
+            <Link
+              to="/login"
+              style={{ fontSize: "0.9rem", fontWeight: "600", color: "white" }}
+            >
               ¿Ya eres miembro? Inicia sesión
             </Link>
           </div>
