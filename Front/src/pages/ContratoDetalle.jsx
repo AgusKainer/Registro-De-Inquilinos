@@ -1,17 +1,33 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  getContratoById,
+  fetchContratoById,
   updateContrato,
-  createReparacion,
   renewContrato,
-} from "../services/api";
+  clearContratoActual,
+  clearSuccess,
+} from "../redux/slices/contratoSlice";
+import {
+  createReparacion,
+  clearSuccess as clearReparacionSuccess,
+} from "../redux/slices/reparacionSlice";
 
 const ContratoDetalle = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [contrato, setContrato] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+
+  const {
+    contratoActual: contrato,
+    loading,
+    error,
+    success,
+  } = useSelector((state) => state.contratos);
+  const { success: reparacionSuccess, error: reparacionError } = useSelector(
+    (state) => state.reparaciones,
+  );
+
   const [editMode, setEditMode] = useState(false);
   const [editedData, setEditedData] = useState({});
 
@@ -33,63 +49,57 @@ const ContratoDetalle = () => {
   });
 
   useEffect(() => {
-    fetchContrato();
-  }, [id]);
+    dispatch(fetchContratoById(id));
+  }, [id, dispatch]);
 
-  const fetchContrato = async () => {
-    try {
-      const data = await getContratoById(id);
-      setContrato(data);
+  useEffect(() => {
+    if (contrato) {
       setEditedData({
-        valor: data.valor,
-        fechaVigente: data.fechaVigente.split("T")[0],
-        estado: data.estado,
+        valor: contrato.valor,
+        fechaVigente: contrato.fechaVigente.split("T")[0],
+        estado: contrato.estado,
       });
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
     }
-  };
+  }, [contrato]);
+
+  useEffect(() => {
+    if (success) {
+      alert("Cambio realizado exitosamente");
+      dispatch(clearSuccess());
+      dispatch(fetchContratoById(id));
+    }
+  }, [success, dispatch, id]);
+
+  useEffect(() => {
+    if (reparacionSuccess) {
+      alert("Reparación registrada");
+      dispatch(clearReparacionSuccess());
+      dispatch(fetchContratoById(id));
+    }
+  }, [reparacionSuccess, dispatch, id]);
 
   const handleUpdate = async () => {
-    try {
-      await updateContrato(id, editedData);
-      setEditMode(false);
-      fetchContrato();
-    } catch (error) {
-      alert("Error al actualizar");
-    }
+    dispatch(updateContrato({ id, data: editedData }));
+    setEditMode(false);
   };
 
   const handleAddRepair = async (e) => {
     e.preventDefault();
-    try {
-      await createReparacion({ ...repairForm, contratoId: id });
-      setShowRepairForm(false);
-      setRepairForm({ descripcion: "", costo: 0, responsable: "INQUILINO" });
-      fetchContrato();
-    } catch (error) {
-      alert("Error al añadir reparación");
-    }
+    dispatch(createReparacion({ ...repairForm, contratoId: id }));
+    setShowRepairForm(false);
+    setRepairForm({ descripcion: "", costo: 0, responsable: "INQUILINO" });
   };
 
   const handleRenew = async (e) => {
     e.preventDefault();
-    try {
-      const formData = new FormData();
-      formData.append("fechaInicio", renewData.fechaInicio);
-      formData.append("fechaFin", renewData.fechaFin);
-      formData.append("nuevoValor", renewData.nuevoValor);
-      if (renewData.clausulas)
-        formData.append("clausulas", renewData.clausulas);
+    const formData = new FormData();
+    formData.append("fechaInicio", renewData.fechaInicio);
+    formData.append("fechaFin", renewData.fechaFin);
+    formData.append("nuevoValor", renewData.nuevoValor);
+    if (renewData.clausulas) formData.append("clausulas", renewData.clausulas);
 
-      await renewContrato(id, formData);
-      setShowRenewForm(false);
-      fetchContrato();
-    } catch (error) {
-      alert("Error al renovar");
-    }
+    dispatch(renewContrato({ id, payload: formData }));
+    setShowRenewForm(false);
   };
 
   if (loading)
@@ -98,6 +108,14 @@ const ContratoDetalle = () => {
         Cargando detalles...
       </div>
     );
+
+  if (error)
+    return (
+      <div style={{ padding: "2rem", textAlign: "center", color: "red" }}>
+        Error: {error}
+      </div>
+    );
+
   if (!contrato)
     return (
       <div style={{ padding: "2rem", textAlign: "center" }}>

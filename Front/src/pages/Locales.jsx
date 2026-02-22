@@ -1,40 +1,45 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getLocales, createLocal, deleteLocal } from "../services/api";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchLocales,
+  createLocal,
+  deleteLocal,
+  clearSuccess,
+} from "../redux/slices/localSlice";
 
 const Locales = () => {
-  const [locales, setLocales] = useState([]);
+  const dispatch = useDispatch();
+  const { locales, loading, success } = useSelector((state) => state.locales);
   const [form, setForm] = useState({
     observaciones: "",
     tipo: "vivienda",
     fotos: null,
-    direccion: "", // Nuevo campo
-    n_departamento: null, // Nuevo campo
+    direccion: "",
+    n_departamento: null,
   });
 
   useEffect(() => {
-    fetchLocales();
-  }, []);
+    dispatch(fetchLocales());
+  }, [dispatch]);
 
-  const fetchLocales = async () => {
-    try {
-      const data = await getLocales();
-      setLocales(data);
-    } catch (error) {
-      console.error(error);
+  useEffect(() => {
+    if (success) {
+      alert("Propiedad registrada exitosamente");
+      dispatch(clearSuccess());
+      setForm({
+        observaciones: "",
+        tipo: "vivienda",
+        fotos: null,
+        direccion: "",
+        n_departamento: null,
+      });
     }
-  };
+  }, [success, dispatch]);
 
   const handleDelete = async (id) => {
     if (window.confirm("¿Está seguro de que desea eliminar esta propiedad?")) {
-      try {
-        await deleteLocal(id);
-        fetchLocales();
-      } catch (error) {
-        alert(
-          "Error al eliminar la propiedad. Asegúrese de que no tenga contratos vinculados.",
-        );
-      }
+      dispatch(deleteLocal(id));
     }
   };
 
@@ -53,8 +58,8 @@ const Locales = () => {
       const formData = new FormData();
       formData.append("observaciones", form.observaciones);
       formData.append("tipo", form.tipo);
-      formData.append("direccion", form.direccion); // Nuevo campo
-      formData.append("n_departamento", form.n_departamento); // Nuevo campo
+      formData.append("direccion", form.direccion);
+      formData.append("n_departamento", form.n_departamento);
 
       if (form.fotos) {
         for (let i = 0; i < form.fotos.length; i++) {
@@ -62,15 +67,7 @@ const Locales = () => {
         }
       }
 
-      const newLocal = await createLocal(formData);
-      setLocales([...locales, newLocal]);
-      setForm({
-        observaciones: "",
-        tipo: "vivienda",
-        fotos: null,
-        direccion: "", // Reiniciar el campo
-        n_departamento: null, // Reiniciar el campo
-      });
+      dispatch(createLocal(formData));
     } catch (error) {
       console.error(error);
     }
